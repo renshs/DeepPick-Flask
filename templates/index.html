@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link type="text/css" href="{{ url_for('static', filename='style.css')}}" rel="stylesheet" />
+    <link type="text/css" href="{{ url_for('static', filename='style_part.css')}}" rel="stylesheet" />
+    
+</head>
+<body>
+
+<div id="particles-js"></div>
+
+            <div class="container">
+                <div class="chat">
+                    <div class="header">
+                        <img src="static/robot03_90833.png" class="avatar">
+                        <div class="name">што</div>
+                        <div class="status">win</div>
+                    </div>
+                    <div class="content">
+                    </div>
+                    <div class="footer">
+                        <input type="text" class="input" placeholder="Напишите сообщение...">
+                        <button class="send">Отправить</button>
+                    </div>
+                </div>
+            </div>
+
+<script>
+    var input = document.querySelector(".input");
+    var send = document.querySelector(".send");
+    var content = document.querySelector(".content");
+
+    input.onkeydown = function(event) {
+        if (event.keyCode === 13) {
+            send.onclick();
+        }
+    };
+
+    function addMessage(text, sender) {
+        var div = document.createElement("div");
+        var img = document.createElement("img");
+        var span = document.createElement("span");
+
+        div.className = "message " + sender;
+        img.className = "avatar";
+
+        span.className = "bubble";
+        span.textContent = text;
+
+        if ( sender !== "me"){
+            img.src ="static/robot03_90833.png";
+            div.appendChild(img);
+            div.appendChild(span);
+        }else{
+            img.src ="static/png-clipart-computer-icons-user-interface-administrator-hand-monochrome.png";
+            div.appendChild(span);
+            div.appendChild(img);
+        }
+
+        content.appendChild(div);
+
+        content.scrollTop = content.scrollHeight;
+    }
+
+
+    send.onclick = function() {
+
+        var text = input.value;
+
+        if (text) {
+
+            addMessage(text, "me");
+
+            input.value = "";
+
+            setTimeout(function() {
+
+                var reply = "ВЕЧНОЕ УВЫ";
+
+                addMessage(reply, "you");
+            }, 1000);
+        }
+    };
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="{{ url_for('static', filename='main.js')}}"></script>
+
+</body>
+</html>
