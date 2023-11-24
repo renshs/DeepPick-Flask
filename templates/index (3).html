@@ -46,6 +46,17 @@
             background-color: white;
             border-radius: 2%;
         }
+        h4, h5{
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+            text-align: center;
+             -webkit-text-stroke: 1px #000000; /* Толщина и цвет обводки */
+            text-stroke: 10px #000000; /* Толщина и цвет обводки (стандартное свойство) */
+            font-weight: 900;
+            color: white;
+        }
 
     </style>
 </head>
@@ -64,7 +75,11 @@
     </label>
     <div class="ans-form">
         {% if answer %}
-        <form action="" method="post" style="display: flex; align-items: center; gap: 10px;"> <!-- Добавлен стиль Flexbox -->
+            <h5 >
+                При выборе опции в выпадающем списке формы select, вы видите <br> министерства / списки тем / тем, предсказанных в соответствии с их релевантностью.
+            </h5>
+            <br>
+        <form action="" method="post" style="display: flex; align-items: center; gap: 10px;">
             <select class="form-select" name="recipient">
                 <option>{{ answer.recipient }}</option>
                 <option value="1">1</option>
@@ -80,6 +95,10 @@
                 <option value="1">1</option>
                 <option value="2">2</option>
             </select>
+
+            <h5>
+                Текст, невозможно изменить.
+            </h5>
 
             <p>
                 <textarea class="input" required readonly name="mail">{{answer.text}}</textarea>
