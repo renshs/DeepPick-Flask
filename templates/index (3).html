@@ -81,19 +81,19 @@
             <br>
         <form action="" method="post" style="display: flex; align-items: center; gap: 10px;">
             <select class="form-select" name="recipient">
-                <option>{{ answer.recipient }}</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
+                {%for recipient in answer.recipients%}
+                <option>{{ recipient }}</option>
+                {%endfor%}
             </select>
             <select class="form-select" name="theme_group">
-                <option>{{ answer.theme_group }}</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
+                {%for theme_group in answer.theme_groups%}
+                <option>{{ theme_group }}</option>
+                {%endfor%}
             </select>
             <select class="form-select" name="theme">
-                <option>{{ answer.theme }}</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
+                {%for theme in answer.themes%}
+                <option>{{ theme }}</option>
+                {%endfor%}
             </select>
 
             <h5>
@@ -105,6 +105,29 @@
             </p>
             <input class="send btn btn-dark" type="submit" value="Отправить" style="max-width: 140px; min-width: 140px">
         </form>
+        <br>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="col">Группа сущностей</th>
+                    <th class="col">Сущности</th>
+                </tr>
+            </thead>
+            <tbody>
+            {%for key, values in answer.entities.items()%}
+                <tr> 
+                    <th scope="row">
+                        {{key}}
+                    </th>
+                    <td>
+                        {%for value in values%}
+                            {{value}}
+                        {%endfor%}
+                    </td>
+                </tr>
+            {%endfor%}
+            </tbody>
+        </table>
         {% endif %}
     </div>
 

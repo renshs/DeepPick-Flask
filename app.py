@@ -27,7 +27,11 @@ class Request(db.Model):
    
 admin.add_view(ModelView(Request, db.session))
 
-
+predict = {"recipients": ["Минсдрав", "Минюст", "Автодор", "Жилупр"],
+           "theme_groups": ["Здоровье", "Медицина", "Образование", "Логистика"],
+           "themes": ["Сгорела крыша", "Съели голубя", "Ямы на дорогах", "Перегорели фонари"],
+           "text": "",
+           "entities": {"Локация": ["Пермь", "ул. Подлупка", "ул. Хоруса"], "Персона": ["Семенов", "Знаменская", "Ленин", "Сталин", "Байден", "Обама", "Троцкий", "Маркс", "Энгильс", "Морти", "Рик", "Семенов", "Знаменская", "Ленин", "Сталин", "Байден", "Обама", "Троцкий", "Маркс", "Энгильс", "Морти", "Рик"], "Организации": ["Кафе Приора"]}}
 
 commit = []
 @app.route("/", methods=["GET", "POST"])
@@ -41,12 +45,12 @@ def home():
       except:
          pass
       try:
-         text = request.form["answer"]
+         predict["text"] = request.form["answer"]
       except:
          commit = [request.form["mail"], request.form["theme"], request.form["recipient"], request.form["theme_group"]]
 
-         text = ""
-      if not text:
+         predict["text"] = ""
+      if not predict["text"]:
          # return redirect(url_for("succesful"))
          request_comm = Request()
          [request_comm.mail, request_comm.theme, request_comm.recipient, request_comm.theme_group, request_comm.status] = commit + [False]
@@ -54,7 +58,7 @@ def home():
          db.session.commit()
          commit = []
          return render_template('succesful.html')
-      return render_template('index (3).html', answer={"recipient": "Министерство", "theme_group": "Группа тем", "theme": "Тема", "text": text})
+      return render_template('index (3).html', answer=predict)
    return render_template('index (3).html')
 
 # @app.route('/return')
@@ -68,6 +72,6 @@ def succesful():
 
 
 if __name__ == "__main__":
-   app.run(host='0.0.0.0', port=7777)
-   # from waitress import serve
-   # serve(app, host='192.168.68.100', port=7777)
+   #app.run(host='0.0.0.0', port=7777)
+   from waitress import serve
+   serve(app, host='192.168.68.100', port=7777)
