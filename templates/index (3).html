@@ -6,14 +6,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
         .input-form {
-            margin: 10px;
+            {#margin-top: 10px;#}
             background: #587a60;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+
             padding: 50px;
             border-radius: 2%;
+            display: block;
+             position: absolute;
+            transform: translate(-50%);
+             left: 50%;
+            margin: 10px 0 0;
         }
         .input {
             width: auto;
@@ -30,22 +32,27 @@
 
         .ans-form form {
             display: flex;
+              flex-direction: column;
+            align-items: flex-start;
             flex-wrap: wrap; /* Добавляет возможность переноса элементов */
-            align-items: flex-start; /* Выравнивание элементов в начале контейнера */
+            {#align-items: flex-start; #}
         }
 
         .ans-form .form-select {
+              width: 100%;
+            margin-bottom: 10px;
             flex-basis: calc(33% - 5px); /* Устанавливает базовый размер для select, с учетом 10px gap между ними */
         }
 
-        .ans-form .white, .ans-form .send {
+         .ans-form .send {
             flex-basis: 100%;
             margin-top: 10px;
         }
-        .white{
-            background-color: white;
-            border-radius: 2%;
-        }
+         .send{
+               width: 100%;
+  margin-top: 10px;
+         }
+
         h4, h5{
 
     display: block;
@@ -97,9 +104,8 @@
             </select>
 
             <h5>
-                Текст, невозможно изменить.
+                Текст ниже - только для чтения
             </h5>
-
             <p>
                 <textarea class="input" required readonly name="mail">{{answer.text}}</textarea>
             </p>
