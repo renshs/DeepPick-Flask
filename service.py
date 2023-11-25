@@ -357,6 +357,8 @@ class Preprocessor:
                 result[ent.label_] = [ent.text]
             else:
                 result[ent.label_].append(ent.text)
+        for i in result:
+            result[i] = ", ".join(result[i]).split()
         return result
 
     def get_groups_web(self, text):
@@ -447,20 +449,3 @@ class Preprocessor:
             "text": "",
             "entities": self.ner_text(text),
         }
-
-
-d = Preprocessor(
-    FILE_NAME, MODEL_GROUPS, MODEL_PERFORMER, MODEL_TOPIC, MODEL_FASTTEXT
-)
-
-# print(d.get_performers(), d.data["Исполнитель"])
-# q = []
-# for i, j in zip(d.get_topic(), d.data["Тема"]):
-#     q.append(i == j)
-# print(sum(q))
-n = 7
-print(
-    d.get_groups_web(d.data["Текст инцидента"].values[n]),
-    d.front_info((d.data["Текст инцидента"].values[n]))
-)
-print()
